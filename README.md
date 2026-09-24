@@ -3,7 +3,7 @@
 [![Language](https://img.shields.io/badge/Language-Verilog%20HDL-blue.svg)](https://en.wikipedia.org/wiki/Verilog)
 [![Toolchain](https://img.shields.io/badge/Simulation-Icarus%20Verilog%20%7C%20GTKWave-purple.svg)](http://iverilog.icarus.com/)
 [![Architecture](https://img.shields.io/badge/Architecture-Harvard%20RISC-orange.svg)]()
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-All%20Rights%20Reserved-red.svg)](LICENSE)
 
 A complete, cycle-accurate **8-bit RISC microprocessor** implemented in synthesizable **Verilog HDL**, featuring a Harvard architecture with independent **L1 Instruction & Data Caches**, multi-cycle memory interfaces, a dedicated barrel/rotate shifter, an 8-bit array multiplier, and a custom **C-based assembly toolchain**.
 
@@ -271,3 +271,12 @@ gtkwave cpu_wavedata.vcd &
 - **Department of Computer Engineering, University of Peradeniya**
 - Developed as part of the **CO2070: Computer Architecture** series.
 - Designed & Verified by **E/22/159** & **E/22/004**.
+
+---
+
+## 🔒 License & Academic Integrity
+
+This project is licensed under a strict **Proprietary & Academic Integrity License (All Rights Reserved)**. See the [LICENSE](LICENSE) file for complete legal terms.
+
+- **Viewing & Portfolio Review**: Permitted for recruiters, employers, and educational study.
+- **Copying & Academic Submissions**: **STRICTLY PROHIBITED.** Copying, reusing, or submitting this architecture/source code as university coursework, lab exercises, or academic submissions constitutes plagiarism and academic dishonesty. Unauthorized forks or reproductions will be reported and subjected to DMCA takedown requests.
