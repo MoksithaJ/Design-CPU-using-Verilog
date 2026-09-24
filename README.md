@@ -269,5 +269,5 @@ gtkwave cpu_wavedata.vcd &
 ## 👨‍💻 Authors & Acknowledgments
 
 - **Department of Computer Engineering, University of Peradeniya**
-- Developed as part of the **CO2070: Computer Architecture** series.
-- Designed & Verified by **E/22/159** & **E/22/004**.
+- Developed as part of the **CO2070: Computer Architecture** Course.
+- Designed & Verified by **Moksitha Jayanga(E/22/159)** & **Damith Dilshan(E/22/004)**.
