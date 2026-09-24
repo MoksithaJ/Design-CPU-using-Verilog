@@ -10,6 +10,7 @@ A complete, cycle-accurate **8-bit RISC microprocessor** implemented in synthesi
 ---
 
 ## 📑 Table of Contents
+
 - [Architecture Overview](#-architecture-overview)
 - [System Architecture Diagram](#-system-architecture-diagram)
 - [Instruction Set Architecture (ISA)](#-instruction-set-architecture-isa)
@@ -91,30 +92,31 @@ VeriCore-8 uses a fixed 32-bit instruction format divided into 4 byte-aligned fi
 
 ### Supported Instructions
 
-| Mnemonic | Opcode (Hex) | Type | Syntax | RTL Operation | Description |
-|:---|:---:|:---:|:---|:---|:---|
-| `loadi` | `0x00` | I-Type | `loadi Rd, IMM` | `R[Rd] = IMM` | Load 8-bit immediate value |
-| `mov`   | `0x01` | R-Type | `mov Rd, Rs` | `R[Rd] = R[Rs]` | Register-to-register copy |
-| `add`   | `0x02` | R-Type | `add Rd, Rs, Rt` | `R[Rd] = R[Rs] + R[Rt]` | 8-bit 2's complement addition |
-| `sub`   | `0x03` | R-Type | `sub Rd, Rs, Rt` | `R[Rd] = R[Rs] - R[Rt]` | Subtraction via internal 2's complement |
-| `and`   | `0x04` | R-Type | `and Rd, Rs, Rt` | `R[Rd] = R[Rs] & R[Rt]` | Bitwise logical AND |
-| `or`    | `0x05` | R-Type | `or Rd, Rs, Rt` | `R[Rd] = R[Rs] \| R[Rt]`| Bitwise logical OR |
-| `j`     | `0x06` | J-Type | `j OFFSET` | `PC = (PC+4) + (OFFSET<<2)` | Unconditional branch / jump |
-| `beq`   | `0x07` | B-Type | `beq OFFSET, Rs, Rt` | `if (Rs == Rt) PC += (OFFSET<<2)` | Branch if Equal |
-| `bne`   | `0x0C` | B-Type | `bne OFFSET, Rs, Rt` | `if (Rs != Rt) PC += (OFFSET<<2)` | Branch if Not Equal |
-| `sll`   | `0x0D` | S-Type | `sll Rd, Rs, shamt` | `R[Rd] = R[Rs] << shamt` | Shift Left Logical |
-| `srl`   | `0x0E` | S-Type | `srl Rd, Rs, shamt` | `R[Rd] = R[Rs] >> shamt` | Shift Right Logical (zero fill) |
-| `sra`   | `0x0F` | S-Type | `sra Rd, Rs, shamt` | `R[Rd] = R[Rs] >>> shamt` | Shift Right Arithmetic (sign preserved) |
-| `ror`   | `0x10` | S-Type | `ror Rd, Rs, shamt` | `R[Rd] = rot_right(R[Rs], shamt)`| Circular Rotate Right |
-| `mult`  | `0x11` | R-Type | `mult Rd, Rs, Rt`| `R[Rd] = R[Rs] * R[Rt]` | 8-bit unsigned hardware multiplication |
-| `lwd`   | `0x08` | M-Type | `lwd Rd, Rs` | `R[Rd] = Mem[R[Rs]]` | Load word from data memory |
-| `swd`   | `0x0A` | M-Type | `swd Rs, Rd` | `Mem[R[Rd]] = R[Rs]` | Store word into data memory |
+| Mnemonic | Opcode (Hex) |  Type  | Syntax               | RTL Operation                     | Description                             |
+| :------- | :----------: | :----: | :------------------- | :-------------------------------- | :-------------------------------------- |
+| `loadi`  |    `0x00`    | I-Type | `loadi Rd, IMM`      | `R[Rd] = IMM`                     | Load 8-bit immediate value              |
+| `mov`    |    `0x01`    | R-Type | `mov Rd, Rs`         | `R[Rd] = R[Rs]`                   | Register-to-register copy               |
+| `add`    |    `0x02`    | R-Type | `add Rd, Rs, Rt`     | `R[Rd] = R[Rs] + R[Rt]`           | 8-bit 2's complement addition           |
+| `sub`    |    `0x03`    | R-Type | `sub Rd, Rs, Rt`     | `R[Rd] = R[Rs] - R[Rt]`           | Subtraction via internal 2's complement |
+| `and`    |    `0x04`    | R-Type | `and Rd, Rs, Rt`     | `R[Rd] = R[Rs] & R[Rt]`           | Bitwise logical AND                     |
+| `or`     |    `0x05`    | R-Type | `or Rd, Rs, Rt`      | `R[Rd] = R[Rs] \| R[Rt]`          | Bitwise logical OR                      |
+| `j`      |    `0x06`    | J-Type | `j OFFSET`           | `PC = (PC+4) + (OFFSET<<2)`       | Unconditional branch / jump             |
+| `beq`    |    `0x07`    | B-Type | `beq OFFSET, Rs, Rt` | `if (Rs == Rt) PC += (OFFSET<<2)` | Branch if Equal                         |
+| `bne`    |    `0x0C`    | B-Type | `bne OFFSET, Rs, Rt` | `if (Rs != Rt) PC += (OFFSET<<2)` | Branch if Not Equal                     |
+| `sll`    |    `0x0D`    | S-Type | `sll Rd, Rs, shamt`  | `R[Rd] = R[Rs] << shamt`          | Shift Left Logical                      |
+| `srl`    |    `0x0E`    | S-Type | `srl Rd, Rs, shamt`  | `R[Rd] = R[Rs] >> shamt`          | Shift Right Logical (zero fill)         |
+| `sra`    |    `0x0F`    | S-Type | `sra Rd, Rs, shamt`  | `R[Rd] = R[Rs] >>> shamt`         | Shift Right Arithmetic (sign preserved) |
+| `ror`    |    `0x10`    | S-Type | `ror Rd, Rs, shamt`  | `R[Rd] = rot_right(R[Rs], shamt)` | Circular Rotate Right                   |
+| `mult`   |    `0x11`    | R-Type | `mult Rd, Rs, Rt`    | `R[Rd] = R[Rs] * R[Rt]`           | 8-bit unsigned hardware multiplication  |
+| `lwd`    |    `0x08`    | M-Type | `lwd Rd, Rs`         | `R[Rd] = Mem[R[Rs]]`              | Load word from data memory              |
+| `swd`    |    `0x0A`    | M-Type | `swd Rs, Rd`         | `Mem[R[Rd]] = R[Rs]`              | Store word into data memory             |
 
 ---
 
 ## 💾 Cache & Memory Hierarchy
 
 ### 1. L1 Instruction Cache (`icache.v`)
+
 - **Capacity**: 128 Bytes (8 cache lines × 16 Bytes per block = 4 instructions/line).
 - **Design**: Direct-mapped, read-only with synchronous tag/valid arrays and asynchronous block extraction.
 - **Address Breakdown**:
@@ -131,6 +133,7 @@ VeriCore-8 uses a fixed 32-bit instruction format divided into 4 byte-aligned fi
   - `CACHE_UPDATE (10)`: Updates cache block and tag array, sets valid bit, and returns to `IDLE`.
 
 ### 2. L1 Data Cache (`dcache.v`)
+
 - **Capacity**: 32 Bytes (8 cache lines × 4 Bytes per block).
 - **Design**: Direct-mapped with write-back and write-allocate policy to minimize memory traffic.
 - **Address Breakdown**:
@@ -148,10 +151,13 @@ VeriCore-8 uses a fixed 32-bit instruction format divided into 4 byte-aligned fi
   - `CACHE_UPDATE`: Updates line data, adjusts dirty flag, and completes CPU operation.
 
 ### 3. CPU Stall Arbitration
+
 ```verilog
 assign cpu_busywait = ic_busywait | dc_busywait;
 ```
+
 When either cache controller encounters a miss, the `BUSYWAIT` signal asserts:
+
 1. Freezes the Program Counter (`PC <= PC`).
 2. Disables register file write-enable gating (`safe_write_enable = WRITEENABLE & ~BUSYWAIT`).
 3. Holds the pipeline in a slip state until data is resolved, eliminating hazards.
@@ -174,7 +180,7 @@ The ALU (`alu.v`) uses a modular design featuring parallel functional units sele
 The repository includes a standalone C-based assembler (`CO2070Assembler.c`) and utility scripts for converting human-readable assembly syntax into executable machine memory images:
 
 ```
- Assembly (.s) 
+ Assembly (.s)
      │
      ▼ [CO2070Assembler.c]
  Machine Code (.machine - 32-bit binary strings)
@@ -187,6 +193,7 @@ The repository includes a standalone C-based assembler (`CO2070Assembler.c`) and
 ```
 
 ### Compiling and Assembling:
+
 ```bash
 # 1. Compile the assembler
 gcc CO2070Assembler.c -o CO2070Assembler
@@ -219,11 +226,13 @@ The processor design has been verified against rigorous synthetic programs:
 ## 🚀 Getting Started & Simulation Guide
 
 ### Prerequisites
+
 - [Icarus Verilog](http://iverilog.icarus.com/) (`iverilog` & `vvp`)
 - [GTKWave](http://gtkwave.sourceforge.net/) (for inspecting timing diagrams)
 - GCC (optional, for assembler compilation)
 
 ### Running Simulation
+
 ```bash
 # Clone the repository
 git clone https://github.com/<your-username>/VeriCore-8.git
@@ -237,7 +246,9 @@ vvp cpu_sim
 ```
 
 ### Inspecting Waveforms
+
 Simulation generates a comprehensive Value Change Dump (`cpu_wavedata.vcd`). Inspect all control signals, register values, and cache FSM states:
+
 ```bash
 gtkwave cpu_wavedata.vcd &
 ```
@@ -269,8 +280,9 @@ gtkwave cpu_wavedata.vcd &
 ## 👨‍💻 Authors & Acknowledgments
 
 - **Department of Computer Engineering, University of Peradeniya**
-- Developed as part of the **CO2070: Computer Architecture** series.
-- Designed & Verified by **E/22/159** & **E/22/004**.
+
+- Developed as part of the **CO2070: Computer Architecture** Course.
+- Designed & Verified by **Moksitha Jayanga(E/22/159)** & **Damith Dilshan(E/22/004)**.
 
 ---
 
